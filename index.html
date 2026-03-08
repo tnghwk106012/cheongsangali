@@ -420,17 +420,6 @@
     padding: 0 4px;
   }
 
-  .nav-wrap::before, .nav-wrap::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0; width: 40px;
-    z-index: 2;
-    pointer-events: none;
-    display: none;
-  }
-
-  .nav-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg-primary), transparent); }
-  .nav-wrap::after { right: 0; background: linear-gradient(270deg, var(--bg-primary), transparent); }
 
   .nav {
     display: flex;
@@ -633,7 +622,6 @@
   .table-scroll {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    position: relative;
   }
 
 
@@ -1145,7 +1133,6 @@
 
     /* Mobile nav: horizontal scroll */
     .nav-wrap { margin-bottom: 56px; }
-    .nav-wrap::before, .nav-wrap::after { display: block; }
     .nav {
       justify-content: flex-start;
       flex-wrap: nowrap;
