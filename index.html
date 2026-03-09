@@ -2117,6 +2117,258 @@
     .build-equip-grid { grid-template-columns: 1fr; }
   }
 
+  /* ===== Gallery Section ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .gallery-grid .gallery-item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid rgba(212,168,67,0.12);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,168,67,0.08);
+    transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    background: var(--bg-card);
+  }
+
+  .gallery-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(212,168,67,0.06);
+    pointer-events: none;
+    z-index: 2;
+    transition: border-color 0.4s;
+  }
+
+  .gallery-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(4,7,13,0.7) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .gallery-item:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(212,168,67,0.12), inset 0 1px 0 rgba(212,168,67,0.15);
+    z-index: 10;
+  }
+
+  .gallery-item:hover::before {
+    border-color: rgba(212,168,67,0.2);
+  }
+
+  .gallery-item:hover::after {
+    opacity: 1;
+  }
+
+  .gallery-item:hover .gallery-img {
+    transform: scale(1.06);
+  }
+
+  .gallery-item:hover .gallery-caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .gallery-item:first-child .gallery-img {
+    aspect-ratio: 21/9;
+  }
+
+  .gallery-item:not(:first-child) .gallery-img {
+    aspect-ratio: 16/10;
+  }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 14px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.35s;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+
+  .gallery-caption span {
+    color: var(--gold-light);
+  }
+
+  /* Frame ornament corners */
+  .gallery-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .gallery-item:hover .gallery-corner { opacity: 1; }
+
+  .gallery-corner::before,
+  .gallery-corner::after {
+    content: '';
+    position: absolute;
+    background: var(--gold);
+  }
+
+  .gc-tl { top: 6px; left: 6px; }
+  .gc-tl::before { top: 0; left: 0; width: 16px; height: 1px; }
+  .gc-tl::after { top: 0; left: 0; width: 1px; height: 16px; }
+
+  .gc-tr { top: 6px; right: 6px; }
+  .gc-tr::before { top: 0; right: 0; width: 16px; height: 1px; }
+  .gc-tr::after { top: 0; right: 0; width: 1px; height: 16px; }
+
+  .gc-bl { bottom: 6px; left: 6px; }
+  .gc-bl::before { bottom: 0; left: 0; width: 16px; height: 1px; }
+  .gc-bl::after { bottom: 0; left: 0; width: 1px; height: 16px; }
+
+  .gc-br { bottom: 6px; right: 6px; }
+  .gc-br::before { bottom: 0; right: 0; width: 16px; height: 1px; }
+  .gc-br::after { bottom: 0; right: 0; width: 1px; height: 16px; }
+
+  /* Lightbox */
+  .gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(4,7,13,0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.35s;
+    cursor: zoom-out;
+  }
+
+  .gallery-lightbox.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .gallery-lightbox img {
+    max-width: 92vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    border: 2px solid rgba(212,168,67,0.2);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8), 0 0 40px rgba(212,168,67,0.08);
+    transform: scale(0.92);
+    transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .gallery-lightbox.open img {
+    transform: scale(1);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 50%;
+    background: rgba(14,20,35,0.8);
+    color: var(--gold);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+    z-index: 10000;
+  }
+
+  .lightbox-close:hover {
+    background: rgba(212,168,67,0.15);
+    border-color: var(--gold);
+    transform: rotate(90deg);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(212,168,67,0.15);
+    border-radius: 50%;
+    background: rgba(14,20,35,0.7);
+    color: var(--gold);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+    z-index: 10000;
+  }
+
+  .lightbox-nav:hover {
+    background: rgba(212,168,67,0.12);
+    border-color: var(--gold);
+  }
+
+  .lightbox-prev { left: 20px; }
+  .lightbox-next { right: 20px; }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    z-index: 10000;
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .gallery-item:first-child { grid-column: 1 / -1; }
+    .lightbox-nav { width: 38px; height: 38px; font-size: 15px; }
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 768px) {
     .equip-tabs { gap: 6px; }
     .equip-tab { padding: 9px 14px; font-size: 11px; }
@@ -2232,6 +2484,7 @@
       <a href="#builds">&#9876; 개인빌드</a>
       <a href="#equipment">&#9876; 장비세팅</a>
       <a href="#pvp-guide">&#128163; 대인전입문</a>
+      <a href="#gallery">&#127912; 갤러리</a>
       <a href="#links">&#128279; 링크</a>
     </nav>
   </div>
@@ -3521,6 +3774,69 @@
     </div>
   </section>
 
+  <!-- ==================== GALLERY ==================== -->
+  <section class="section" id="gallery">
+    <div class="section-header">
+      <div class="section-icon">&#127912;</div>
+      <div class="section-title">전투 기록</div>
+      <div class="section-count">7장</div>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox(0)">
+        <img class="gallery-img" src="images/1.png" alt="해상전 1" loading="lazy">
+        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
+        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
+        <div class="gallery-caption"><span>&#9876;</span> 청산가리 함대 출격</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(1)">
+        <img class="gallery-img" src="images/2.png" alt="해상전 2" loading="lazy">
+        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
+        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
+        <div class="gallery-caption"><span>&#9876;</span> 대규모 해전</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(2)">
+        <img class="gallery-img" src="images/3.png" alt="해상전 3" loading="lazy">
+        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
+        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
+        <div class="gallery-caption"><span>&#128165;</span> 포격전 교전</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(3)">
+        <img class="gallery-img" src="images/4.jpeg" alt="해상전 4" loading="lazy">
+        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
+        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
+        <div class="gallery-caption"><span>&#128163;</span> 기뢰 설치전</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(4)">
+        <img class="gallery-img" src="images/5.png" alt="해상전 5" loading="lazy">
+        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
+        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
+        <div class="gallery-caption"><span>&#9760;</span> 적함 나포</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(5)">
+        <img class="gallery-img" src="images/6.png" alt="해상전 6" loading="lazy">
+        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
+        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
+        <div class="gallery-caption"><span>&#128165;</span> 연합 함대전</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(6)">
+        <img class="gallery-img" src="images/7.png" alt="해상전 7" loading="lazy">
+        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
+        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
+        <div class="gallery-caption"><span>&#9876;</span> 근접 백병전</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Overlay -->
+  <div class="gallery-lightbox" id="galleryLightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&#10005;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(event,-1)">&#10094;</button>
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(event,1)">&#10095;</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
   <!-- ==================== LINKS ==================== -->
   <section class="section" id="links">
     <div class="section-header">
@@ -3576,6 +3892,40 @@ function switchBuild(idx) {
   document.querySelectorAll('.build-filter-btn').forEach(function(t,i){t.classList.toggle('active',i===idx);});
   document.querySelectorAll('.build-card-wrap').forEach(function(p,i){p.classList.toggle('active',i===idx);});
 }
+
+/* ===== Gallery Lightbox ===== */
+var galleryImages=['images/1.png','images/2.png','images/3.png','images/4.jpeg','images/5.png','images/6.png','images/7.png'];
+var currentImg=0;
+
+function openLightbox(idx) {
+  currentImg=idx;
+  var lb=document.getElementById('galleryLightbox');
+  document.getElementById('lightboxImg').src=galleryImages[idx];
+  document.getElementById('lightboxCounter').textContent=(idx+1)+' / '+galleryImages.length;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeLightbox(e) {
+  if(e.target.classList.contains('lightbox-nav')||e.target.classList.contains('lightbox-prev')||e.target.classList.contains('lightbox-next')) return;
+  document.getElementById('galleryLightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function navLightbox(e,dir) {
+  e.stopPropagation();
+  currentImg=(currentImg+dir+galleryImages.length)%galleryImages.length;
+  document.getElementById('lightboxImg').src=galleryImages[currentImg];
+  document.getElementById('lightboxCounter').textContent=(currentImg+1)+' / '+galleryImages.length;
+}
+
+document.addEventListener('keydown',function(e){
+  var lb=document.getElementById('galleryLightbox');
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') { lb.classList.remove('open'); document.body.style.overflow=''; }
+  if(e.key==='ArrowLeft') navLightbox(e,-1);
+  if(e.key==='ArrowRight') navLightbox(e,1);
+});
 function switchGuideTab(idx) {
   document.querySelectorAll('.guide-tab').forEach(function(t,i){t.classList.toggle('active',i===idx);});
   document.querySelectorAll('.guide-panel').forEach(function(p,i){p.classList.toggle('active',i===idx);});
