@@ -3776,7 +3776,7 @@
     <div class="section-header">
       <div class="section-icon">&#127912;</div>
       <div class="section-title">전투 기록</div>
-      <div class="section-count">7장</div>
+      <div class="section-count" id="galleryCount">0장</div>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
       <span style="font-size:11px;color:var(--text-muted);letter-spacing:1px;align-self:center;">TAGS</span>
@@ -3788,50 +3788,7 @@
       <span style="font-size:11px;padding:4px 10px;border-radius:12px;background:rgba(14,20,35,0.7);border:1px solid var(--border);color:var(--text-secondary);">&#127942; 승리</span>
     </div>
 
-    <div class="gallery-grid">
-      <div class="gallery-item" onclick="openLightbox(0)">
-        <img class="gallery-img" src="images/1.png" alt="해상전 1" loading="lazy">
-        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
-        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
-        <div class="gallery-caption"><span>&#9876;</span> 전투/교전</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox(1)">
-        <img class="gallery-img" src="images/2.png" alt="해상전 2" loading="lazy">
-        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
-        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
-        <div class="gallery-caption"><span>&#9876;</span> 전투/교전</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox(2)">
-        <img class="gallery-img" src="images/3.png" alt="해상전 3" loading="lazy">
-        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
-        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
-        <div class="gallery-caption"><span>&#128165;</span> 포격/폭발</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox(3)">
-        <img class="gallery-img" src="images/4.jpeg" alt="해상전 4" loading="lazy">
-        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
-        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
-        <div class="gallery-caption"><span>&#128163;</span> 기뢰/폭파</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox(4)">
-        <img class="gallery-img" src="images/5.png" alt="해상전 5" loading="lazy">
-        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
-        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
-        <div class="gallery-caption"><span>&#9760;</span> 나포/격침</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox(5)">
-        <img class="gallery-img" src="images/6.png" alt="해상전 6" loading="lazy">
-        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
-        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
-        <div class="gallery-caption"><span>&#128165;</span> 포격/폭발</div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox(6)">
-        <img class="gallery-img" src="images/7.png" alt="해상전 7" loading="lazy">
-        <div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>
-        <div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>
-        <div class="gallery-caption"><span>&#9876;</span> 전투/교전</div>
-      </div>
-    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
   </section>
 
   <!-- Lightbox Overlay -->
@@ -3899,9 +3856,45 @@ function switchBuild(idx) {
   document.querySelectorAll('.build-card-wrap').forEach(function(p,i){p.classList.toggle('active',i===idx);});
 }
 
-/* ===== Gallery Lightbox ===== */
-var galleryImages=['images/1.png','images/2.png','images/3.png','images/4.jpeg','images/5.png','images/6.png','images/7.png'];
+/* ===== Gallery Auto-Loader ===== */
+var galleryImages=[];
 var currentImg=0;
+var GALLERY_EXTS=['png','jpeg','jpg','webp'];
+var GALLERY_TAG='\u2694 \uC804\uD22C/\uAD50\uC804'; /* default: ⚔ 전투/교전 */
+
+function tryLoadImage(num) {
+  var extIdx=0;
+  function tryExt() {
+    if(extIdx>=GALLERY_EXTS.length) return; /* 모든 확장자 실패 = 끝 */
+    var src='images/'+num+'.'+GALLERY_EXTS[extIdx];
+    var img=new Image();
+    img.onload=function() {
+      galleryImages.push(src);
+      addGalleryItem(src, galleryImages.length-1);
+      document.getElementById('galleryCount').textContent=galleryImages.length+'\uC7A5';
+      tryLoadImage(num+1); /* 다음 번호 시도 */
+    };
+    img.onerror=function() {
+      extIdx++;
+      tryExt(); /* 다음 확장자 시도 */
+    };
+    img.src=src;
+  }
+  tryExt();
+}
+
+function addGalleryItem(src, idx) {
+  var grid=document.getElementById('galleryGrid');
+  var div=document.createElement('div');
+  div.className='gallery-item';
+  div.onclick=function(){openLightbox(idx);};
+  div.innerHTML=
+    '<img class="gallery-img" src="'+src+'" alt="\uD574\uC0C1\uC804 '+(idx+1)+'" loading="lazy">'+
+    '<div class="gallery-corner gc-tl"></div><div class="gallery-corner gc-tr"></div>'+
+    '<div class="gallery-corner gc-bl"></div><div class="gallery-corner gc-br"></div>'+
+    '<div class="gallery-caption"><span>\u2694</span> \uC804\uD22C/\uAD50\uC804</div>';
+  grid.appendChild(div);
+}
 
 function openLightbox(idx) {
   currentImg=idx;
@@ -4187,6 +4180,7 @@ document.addEventListener('DOMContentLoaded', function(){
   for(var i=0;i<4;i++) buildSkillMatrix(i);
   buildCalc();
   buildSkillsRef();
+  tryLoadImage(1);
   initScrollReveal();
   animateStats();
 });
