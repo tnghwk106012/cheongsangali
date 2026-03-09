@@ -1776,6 +1776,347 @@
     min-width: 60px;
   }
 
+  /* ===== Personal Build Section ===== */
+  .build-filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .build-filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-right: 4px;
+  }
+
+  .build-filter-btn {
+    padding: 9px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .build-filter-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212,168,67,0.12), rgba(212,168,67,0.04));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .build-filter-btn:hover {
+    color: var(--gold);
+    border-color: rgba(212,168,67,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .build-filter-btn:hover::before { opacity: 1; }
+
+  .build-filter-btn.active {
+    color: var(--gold-bright);
+    border-color: var(--gold);
+    background: rgba(212,168,67,0.1);
+    box-shadow: 0 0 20px rgba(212,168,67,0.1), inset 0 1px 0 rgba(212,168,67,0.15);
+  }
+
+  .build-filter-btn.active::before { opacity: 1; }
+
+  .build-card-wrap {
+    display: none;
+    opacity: 0;
+  }
+
+  .build-card-wrap.active {
+    display: block;
+    animation: buildCardIn 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+
+  @keyframes buildCardIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .build-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: all 0.35s;
+  }
+
+  .build-card:hover {
+    border-color: rgba(212,168,67,0.2);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .build-card-top {
+    padding: 28px 28px 20px;
+    background:
+      linear-gradient(135deg, rgba(212,168,67,0.06) 0%, transparent 50%),
+      linear-gradient(225deg, rgba(139,92,246,0.03) 0%, transparent 40%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .build-card-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 28px;
+    right: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212,168,67,0.15), transparent);
+  }
+
+  .build-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .build-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+  }
+
+  .build-badge {
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .build-badge-char {
+    background: linear-gradient(135deg, rgba(212,168,67,0.15), rgba(212,168,67,0.08));
+    color: var(--gold-light);
+    border: 1px solid rgba(212,168,67,0.25);
+  }
+
+  .build-badge-job {
+    background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.06));
+    color: #c4b5fd;
+    border: 1px solid rgba(139,92,246,0.25);
+  }
+
+  .build-card-body {
+    padding: 24px 28px 28px;
+  }
+
+  .build-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .build-info-block {
+    background: rgba(4,7,13,0.5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    transition: border-color 0.25s;
+  }
+
+  .build-info-block:hover {
+    border-color: rgba(212,168,67,0.15);
+  }
+
+  .build-info-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .build-info-label::before {
+    content: '';
+    width: 3px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .build-info-value {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.9;
+  }
+
+  .build-info-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 6px 0 6px 12px;
+    border-left: 2px solid rgba(212,168,67,0.12);
+    margin-top: 6px;
+    line-height: 1.8;
+    transition: border-color 0.25s;
+  }
+
+  .build-info-sub:hover {
+    border-left-color: rgba(212,168,67,0.3);
+  }
+
+  .build-equip-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .build-equip-label::before {
+    content: '';
+    width: 3px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .build-equip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .build-equip-item {
+    background: rgba(4,7,13,0.4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    transition: all 0.25s;
+  }
+
+  .build-equip-item:hover {
+    border-color: rgba(212,168,67,0.2);
+    background: rgba(212,168,67,0.04);
+    transform: translateY(-1px);
+  }
+
+  .build-equip-part {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+  }
+
+  .build-equip-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .build-ranks-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .build-ranks-label::before {
+    content: '';
+    width: 3px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .build-ranks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .build-rank-tag {
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    background: rgba(4,7,13,0.5);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.25s;
+  }
+
+  .build-rank-tag:hover {
+    border-color: rgba(212,168,67,0.2);
+    transform: translateY(-1px);
+  }
+
+  .build-rank-tag .rk-name {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .build-rank-tag .rk-val {
+    color: var(--gold-light);
+    font-weight: 800;
+    font-size: 13px;
+  }
+
+  .build-rank-tag.rk-high .rk-val {
+    color: var(--green);
+  }
+
+  .build-rank-tag.rk-max .rk-val {
+    color: var(--gold-bright);
+    text-shadow: 0 0 8px rgba(212,168,67,0.4);
+  }
+
+  @media (max-width: 768px) {
+    .build-info-grid { grid-template-columns: 1fr; }
+    .build-equip-grid { grid-template-columns: 1fr 1fr; }
+    .build-filter-btn { padding: 7px 14px; font-size: 11px; }
+    .build-card-top { padding: 20px 20px 16px; }
+    .build-card-body { padding: 20px; }
+    .build-name { font-size: 17px; }
+  }
+
+  @media (max-width: 480px) {
+    .build-equip-grid { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 768px) {
     .equip-tabs { gap: 6px; }
     .equip-tab { padding: 9px 14px; font-size: 11px; }
@@ -1888,6 +2229,7 @@
       <a href="#relations">&#9878; 관계도</a>
       <a href="#ship">&#9973; 대표선박</a>
       <a href="#identity">&#127988; 돛도료&문장</a>
+      <a href="#builds">&#9876; 개인빌드</a>
       <a href="#equipment">&#9876; 장비세팅</a>
       <a href="#pvp-guide">&#128163; 대인전입문</a>
       <a href="#links">&#128279; 링크</a>
@@ -2251,6 +2593,125 @@
       <div class="info-card">
         <div class="info-card-title">문장</div>
         <div class="info-card-value">빙고봉고 문장</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PERSONAL BUILDS ==================== -->
+  <section class="section" id="builds">
+    <div class="section-header">
+      <div class="section-icon">&#9876;</div>
+      <div class="section-title">개인 빌드</div>
+      <div class="section-count">길드원별 세팅 비교</div>
+    </div>
+
+    <div class="build-filter-bar">
+      <span class="build-filter-label">빌드 선택</span>
+      <button class="build-filter-btn active" onclick="switchBuild(0)">내염셋 (잡어)</button>
+      <button class="build-filter-btn" onclick="switchBuild(1)">속사셋 (잡어)</button>
+    </div>
+
+    <!-- 빌드 1: 잡어 내염셋 -->
+    <div class="build-card-wrap active" id="build-0">
+      <div class="build-card">
+        <div class="build-card-top">
+          <div class="build-title-row">
+            <span class="build-name">내염셋</span>
+            <span class="build-badge build-badge-char">잡어</span>
+            <span class="build-badge build-badge-job">상급사관</span>
+          </div>
+        </div>
+        <div class="build-card-body">
+          <div class="build-info-grid">
+            <div class="build-info-block">
+              <div class="build-info-label">부관</div>
+              <div class="build-info-value">오부덤 부함장<br>카이사리 선의</div>
+            </div>
+            <div class="build-info-block">
+              <div class="build-info-label">대학스킬</div>
+              <div class="build-info-value">포격 보조 2종, 3종, 4종<br>일괄점검, 조타술2</div>
+            </div>
+            <div class="build-info-block" style="grid-column:1/-1;">
+              <div class="build-info-label">부관 연구스킬</div>
+              <div class="build-info-sub">오부덤: 수리, 재기, 철갑유탄</div>
+              <div class="build-info-sub" style="margin-top:8px;">카이사리: 포술, 전령, 파쇄유탄</div>
+            </div>
+          </div>
+
+          <div class="build-equip-label">장비 구성</div>
+          <div class="build-equip-grid">
+            <div class="build-equip-item"><div class="build-equip-part">머리</div><div class="build-equip-name">베네치아 지휘관 모자</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">몸</div><div class="build-equip-name">페어리테일웨어</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">팔</div><div class="build-equip-name">증기기사 글러브</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">다리</div><div class="build-equip-name">파프닐 그리브</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">무기</div><div class="build-equip-name">주술사 의식검</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">장신구</div><div class="build-equip-name">수학대전</div></div>
+          </div>
+
+          <div class="build-ranks-label">최종 스킬 랭크</div>
+          <div class="build-ranks">
+            <div class="build-rank-tag rk-max"><span class="rk-name">회피</span><span class="rk-val">26</span></div>
+            <div class="build-rank-tag rk-max"><span class="rk-name">포술</span><span class="rk-val">25</span></div>
+            <div class="build-rank-tag rk-max"><span class="rk-name">수평사격</span><span class="rk-val">25</span></div>
+            <div class="build-rank-tag rk-max"><span class="rk-name">탄도학</span><span class="rk-val">25</span></div>
+            <div class="build-rank-tag"><span class="rk-name">관통</span><span class="rk-val">19</span></div>
+            <div class="build-rank-tag"><span class="rk-name">수리</span><span class="rk-val">17</span></div>
+            <div class="build-rank-tag"><span class="rk-name">조타</span><span class="rk-val">14</span></div>
+            <div class="build-rank-tag"><span class="rk-name">속사</span><span class="rk-val">13</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 빌드 2: 잡어 속사셋 -->
+    <div class="build-card-wrap" id="build-1">
+      <div class="build-card">
+        <div class="build-card-top">
+          <div class="build-title-row">
+            <span class="build-name">속사셋</span>
+            <span class="build-badge build-badge-char">잡어</span>
+            <span class="build-badge build-badge-job">상급사관</span>
+          </div>
+        </div>
+        <div class="build-card-body">
+          <div class="build-info-grid">
+            <div class="build-info-block">
+              <div class="build-info-label">부관</div>
+              <div class="build-info-value">오부덤 부함장<br>카이사리 선의</div>
+            </div>
+            <div class="build-info-block">
+              <div class="build-info-label">대학스킬</div>
+              <div class="build-info-value">포격 보조 2종, 3종, 4종<br>일괄점검, 조타술2</div>
+            </div>
+            <div class="build-info-block" style="grid-column:1/-1;">
+              <div class="build-info-label">부관 연구스킬</div>
+              <div class="build-info-sub">오부덤: 수리, 재기, 철갑유탄</div>
+              <div class="build-info-sub" style="margin-top:8px;">카이사리: 포술, 전령, 파쇄유탄</div>
+            </div>
+          </div>
+
+          <div class="build-equip-label">장비 구성</div>
+          <div class="build-equip-grid">
+            <div class="build-equip-item"><div class="build-equip-part">머리</div><div class="build-equip-name">에스파니아 지휘관 모자</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">몸</div><div class="build-equip-name">고양이 꼬리 의상</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">팔</div><div class="build-equip-name">이탈리아 기병의 토시</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">다리</div><div class="build-equip-name">합해 협회의 신발 전투</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">무기</div><div class="build-equip-name">주술사 의식검</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">장신구</div><div class="build-equip-name">알바로의 수기</div></div>
+          </div>
+
+          <div class="build-ranks-label">최종 스킬 랭크</div>
+          <div class="build-ranks">
+            <div class="build-rank-tag rk-max"><span class="rk-name">회피</span><span class="rk-val">26</span></div>
+            <div class="build-rank-tag rk-max"><span class="rk-name">포술</span><span class="rk-val">25</span></div>
+            <div class="build-rank-tag rk-max"><span class="rk-name">수평사격</span><span class="rk-val">25</span></div>
+            <div class="build-rank-tag rk-max"><span class="rk-name">탄도학</span><span class="rk-val">25</span></div>
+            <div class="build-rank-tag rk-high"><span class="rk-name">속사</span><span class="rk-val">22</span></div>
+            <div class="build-rank-tag"><span class="rk-name">관통</span><span class="rk-val">19</span></div>
+            <div class="build-rank-tag"><span class="rk-name">수리</span><span class="rk-val">17</span></div>
+            <div class="build-rank-tag"><span class="rk-name">조타</span><span class="rk-val">12</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2997,8 +3458,8 @@
             <li><strong>포술</strong> <span class="skill-rank">연성 만랭</span></li>
             <li><strong>탄도학</strong> <span class="skill-rank">연성 만랭</span></li>
             <li><strong>수평사격</strong> <span class="skill-rank">연성 만랭</span></li>
-            <li><strong>회피</strong> <span class="skill-rank">연성 만랭</span></li>
-            <li><strong>수리</strong> <span class="skill-rank">연성 만랭</span></li>
+            <li><strong>회피</strong> <span class="skill-rank">만랭</span></li>
+            <li><strong>수리</strong> <span class="skill-rank">만랭</span></li>
             <li><strong>노젓기</strong> <span class="skill-rank">연성 필수</span></li>
             <li><strong>속사</strong> <span class="skill-rank">포탄수 하면서 자연 달성</span></li>
           </ul>
@@ -3110,6 +3571,10 @@
 function switchEquipTab(idx) {
   document.querySelectorAll('.equip-tab').forEach(function(t,i){t.classList.toggle('active',i===idx);});
   document.querySelectorAll('.equip-panel').forEach(function(p,i){p.classList.toggle('active',i===idx);});
+}
+function switchBuild(idx) {
+  document.querySelectorAll('.build-filter-btn').forEach(function(t,i){t.classList.toggle('active',i===idx);});
+  document.querySelectorAll('.build-card-wrap').forEach(function(p,i){p.classList.toggle('active',i===idx);});
 }
 function switchGuideTab(idx) {
   document.querySelectorAll('.guide-tab').forEach(function(t,i){t.classList.toggle('active',i===idx);});
