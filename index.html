@@ -1995,6 +1995,12 @@
     border: 1px solid rgba(139,92,246,0.25);
   }
 
+  .build-badge-spec {
+    background: linear-gradient(135deg, rgba(45,212,191,0.15), rgba(45,212,191,0.06));
+    color: #5eead4;
+    border: 1px solid rgba(45,212,191,0.25);
+  }
+
   .build-card-body {
     padding: 24px 28px 28px;
   }
@@ -2902,6 +2908,9 @@
       <span class="build-filter-label">빌드 선택</span>
       <button class="build-filter-btn active" onclick="switchBuild(0)">내염셋 (잡어)</button>
       <button class="build-filter-btn" onclick="switchBuild(1)">속사셋 (잡어)</button>
+      <button class="build-filter-btn" onclick="switchBuild(2)">날먹 내염셋 (혁이)</button>
+      <button class="build-filter-btn" onclick="switchBuild(3)">날먹 속사셋 (혁이)</button>
+      <button class="build-filter-btn" onclick="switchBuild(4)">날먹 단결셋 (덱스)</button>
     </div>
 
     <!-- 빌드 1: 잡어 내염셋 -->
@@ -3003,6 +3012,91 @@
             <div class="build-rank-tag"><span class="rk-name">관통</span><span class="rk-val">19</span></div>
             <div class="build-rank-tag"><span class="rk-name">수리</span><span class="rk-val">17</span></div>
             <div class="build-rank-tag"><span class="rk-name">조타</span><span class="rk-val">12</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 빌드 3: 혁이 날먹 내염셋 -->
+    <div class="build-card-wrap" id="build-2">
+      <div class="build-card">
+        <div class="build-card-top">
+          <div class="build-title-row">
+            <span class="build-name">날먹 내염셋</span>
+            <span class="build-badge build-badge-char">혁이</span>
+            <span class="build-badge build-badge-job">상급사관</span>
+            <span class="build-badge build-badge-spec">개특슈</span>
+          </div>
+        </div>
+        <div class="build-card-body">
+          <div class="build-equip-label">장비 구성</div>
+          <div class="build-equip-grid">
+            <div class="build-equip-item"><div class="build-equip-part">머리</div><div class="build-equip-name">베네치아 지휘관 모자</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">몸</div><div class="build-equip-name">페어리테일웨어(남)</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">팔</div><div class="build-equip-name">개량연철완갑</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">다리</div><div class="build-equip-name">파프닐 그리브</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">무기</div><div class="build-equip-name">주술사 의식검</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">장신구</div><div class="build-equip-name">이나도메 포술서</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 빌드 4: 혁이 날먹 속사셋 -->
+    <div class="build-card-wrap" id="build-3">
+      <div class="build-card">
+        <div class="build-card-top">
+          <div class="build-title-row">
+            <span class="build-name">날먹 속사셋</span>
+            <span class="build-badge build-badge-char">혁이</span>
+            <span class="build-badge build-badge-job">포술가</span>
+            <span class="build-badge build-badge-spec">특특캐3틱</span>
+          </div>
+        </div>
+        <div class="build-card-body">
+          <div class="build-equip-label">장비 구성</div>
+          <div class="build-equip-grid">
+            <div class="build-equip-item"><div class="build-equip-part">머리</div><div class="build-equip-name">에스파니아 지휘관 모자</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">몸</div><div class="build-equip-name">고양이 꼬리 의상</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">팔</div><div class="build-equip-name">이탈리아 기병의 토시</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">다리</div><div class="build-equip-name">늑대 신발</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">무기</div><div class="build-equip-name">주술사 의식검</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">장신구</div><div class="build-equip-name">단수이 해상전기</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 빌드 5: 덱스 날먹 단결셋 -->
+    <div class="build-card-wrap" id="build-4">
+      <div class="build-card">
+        <div class="build-card-top">
+          <div class="build-title-row">
+            <span class="build-name">날먹 단결셋</span>
+            <span class="build-badge build-badge-char">덱스</span>
+            <span class="build-badge build-badge-job">하이코맨더</span>
+          </div>
+        </div>
+        <div class="build-card-body">
+          <div class="build-info-grid">
+            <div class="build-info-block">
+              <div class="build-info-label">대학스킬</div>
+              <div class="build-info-value">포격보조 4종, 3종</div>
+            </div>
+            <div class="build-info-block">
+              <div class="build-info-label">부관 연구스킬</div>
+              <div class="build-info-value">포술1, 수리1</div>
+            </div>
+          </div>
+
+          <div class="build-equip-label">장비 구성</div>
+          <div class="build-equip-grid">
+            <div class="build-equip-item"><div class="build-equip-part">머리</div><div class="build-equip-name">그리스모</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">몸</div><div class="build-equip-name">피스코드벨리드(녹색)</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">팔</div><div class="build-equip-name">최강 무사의 장갑</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">다리</div><div class="build-equip-name">파프닐 그리브</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">무기</div><div class="build-equip-name">주술사 의식검</div></div>
+            <div class="build-equip-item"><div class="build-equip-part">장신구</div><div class="build-equip-name">수학자의 반지</div></div>
           </div>
         </div>
       </div>
