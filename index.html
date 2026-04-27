@@ -376,6 +376,27 @@
     font-weight: 400;
   }
 
+  /* 신뢰 (Trust) — 파랑 */
+.rel-trust .rel-dot { color: var(--blue); background: var(--blue); animation: pulse-blue 3s infinite; }
+.rel-trust .rel-label { color: var(--blue); }
+.rel-trust { border-color: rgba(59,130,246,0.2); }
+.rel-trust::before { background: linear-gradient(180deg, var(--blue), rgba(59,130,246,0.3)); }
+.rel-trust::after { background: radial-gradient(ellipse at 0% 50%, rgba(59,130,246,0.04) 0%, transparent 70%); }
+.rel-trust:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 24px rgba(59,130,246,0.08); }
+
+/* 동지 (Ally) — 진녹색 + 강조 */
+.rel-ally .rel-dot { color: var(--green); background: var(--green); animation: pulse-green 2s infinite; }
+.rel-ally .rel-label { color: var(--green); font-weight: 700; }
+.rel-ally { border-color: rgba(34,197,94,0.3); }
+.rel-ally::before { background: linear-gradient(180deg, var(--green), rgba(34,197,94,0.4)); width: 4px; }
+.rel-ally::after { background: radial-gradient(ellipse at 0% 50%, rgba(34,197,94,0.08) 0%, transparent 70%); }
+.rel-ally:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 32px rgba(34,197,94,0.12); }
+
+@keyframes pulse-blue {
+  0%, 100% { box-shadow: 0 0 10px var(--blue), 0 0 4px var(--blue); }
+  50% { box-shadow: 0 0 18px var(--blue), 0 0 6px var(--blue); }
+}
+
   .stat-bar {
     margin-top: 10px;
     width: 100%;
